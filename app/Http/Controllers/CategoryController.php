@@ -15,7 +15,7 @@ class CategoryController extends Controller
             'success' => true,
             'message' => 'List Data Categories',
             'data'    => $categories
-        ], 200);
+        ]);
     }
 
     // tambah data baru
@@ -36,6 +36,24 @@ class CategoryController extends Controller
             'message' => 'Category berhasil ditambahkan',
             'data'    => $category
         ], 201);
+    }
+
+    // menampilkan data tertentu
+    public function show($id)
+    {
+        $category = Category::find($id);
+
+        if (!$category) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Category tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $category
+        ]);
     }
 
     // update data
@@ -61,7 +79,7 @@ class CategoryController extends Controller
             'success' => true,
             'message' => 'Category berhasil diupdate',
             'data'    => $category
-        ], 200);
+        ]);
     }
 
     // hapus data
@@ -78,7 +96,7 @@ class CategoryController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Category berhasil dihapus'
-        ], 200);
+        ]);
     } 
 
 
